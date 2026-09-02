@@ -7,6 +7,9 @@ import com.itau.order.strategy.CalculoFreteStrategy;
 import com.itau.order.state.PendenteState;
 import com.itau.order.enums.TipoFrete;
 import com.itau.order.enums.StatusPedido;
+import com.itau.order.chain.ValidadorEstoque;
+import com.itau.order.chain.ValidadorPagamento;
+import com.itau.order.chain.ValidadorFrete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,13 @@ public class PedidoService {
     private List<CalculoFreteStrategy> estrategiasFrete;
 
     @Autowired
-    private ValidadorPedido validadorChain;
+    private ValidadorEstoque validadorEstoque;
+
+    @Autowired
+    private ValidadorPagamento validadorPagamento;
+
+    @Autowired
+    private ValidadorFrete validadorFrete;
 
     @Autowired
     private EstoqueService estoqueService;
@@ -32,7 +41,28 @@ public class PedidoService {
     @Autowired
     private PagamentoService pagamentoService;
 
+    private ValidadorPedido validadorChain;
+
+    // Construtor para configurar a chain
+    public PedidoService() {
+        // Configuração será feita via @PostConstruct ou método init
+    }
+
+    // Método para configurar a chain - será chamado manualmente ou via @PostConstruct
+    public void initChain() {
+        // Configurar a chain manualmente
+        validadorEstoque.setProximo(validadorPagamento);
+        validadorPagamento.setProximo(validadorFrete);
+        validadorChain = validadorEstoque;
+        System.out.println("✅ Chain de validação configurada manualmente!");
+    }
+
     public Pedido criarPedido(Pedido pedido) throws Exception {
+        // Garantir que a chain está configurada
+        if (validadorChain == null) {
+            initChain();
+        }
+        
         System.out.println("\n🔄 INICIANDO CRIAÇÃO DO PEDIDO #" + nextId);
         
         pedido.setId(nextId++);
