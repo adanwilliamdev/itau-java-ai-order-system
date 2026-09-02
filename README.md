@@ -550,7 +550,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais informações.
 
 [![GitHub](https://img.shields.io/badge/GitHub-adanwilliamdev-181717?style=for-the-badge\&logo=github)](https://github.com/adanwilliamdev)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Adan%20William-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://linkedin.com/in/adanwilliam)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Adan%20William-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://linkedin.com/in/awosantos)
 
 </div>
 
