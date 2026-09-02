@@ -14,7 +14,8 @@ public class ValidadorFrete extends ValidadorPedido {
             throw new Exception("❌ Valor de frete inválido");
         }
         
-        switch (pedido.getTipoFrete()) {
+        TipoFrete tipo = pedido.getTipoFrete();
+        switch (tipo) {
             case EXPRESSO:
                 if (pedido.getValorFrete() > 100) {
                     throw new Exception("❌ Frete expresso muito caro para o pedido");

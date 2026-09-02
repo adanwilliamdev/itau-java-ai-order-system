@@ -9,7 +9,9 @@ public class FreteExpressoStrategy implements CalculoFreteStrategy {
 
     @Override
     public Double calcular(Pedido pedido) {
-        double pesoTotal = calcularPesoTotal(pedido);
+        double pesoTotal = pedido.getItens().stream()
+            .mapToDouble(item -> item.getQuantidade() * PESO_FIXO)
+            .sum();
         double distancia = 15.0;
         
         double valor = (pesoTotal * 2.0) + (distancia * 0.5) + 15.0;
@@ -20,11 +22,5 @@ public class FreteExpressoStrategy implements CalculoFreteStrategy {
     @Override
     public String getDescricao() {
         return "Frete Expresso - Entrega em 24h";
-    }
-
-    private double calcularPesoTotal(Pedido pedido) {
-        return pedido.getItens().stream()
-            .mapToDouble(item -> item.getQuantidade() * PESO_FIXO)
-            .sum();
     }
 }

@@ -1,5 +1,8 @@
 package com.itau.order.model;
 
+import com.itau.order.enums.StatusPedido;
+import com.itau.order.enums.TipoFrete;
+import com.itau.order.state.StatePedido;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -21,9 +24,35 @@ public class Pedido {
     
     private Double valorTotal;
     private Double valorFrete;
-    private String tipoFrete;
-    private String status;
+    
+    @Enumerated(EnumType.STRING)
+    private TipoFrete tipoFrete;
+    
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+    
+    @Transient
+    private StatePedido estadoAtual;
+    
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
     private String observacoes;
+
+    public void setEstado(StatePedido estado) {
+        this.estadoAtual = estado;
+        this.status = estado.getStatus();
+        this.dataAtualizacao = LocalDateTime.now();
+    }
+
+    public void proximoEstado() {
+        if (estadoAtual != null) {
+            estadoAtual.proximoEstado(this);
+        }
+    }
+
+    public void cancelar() {
+        if (estadoAtual != null) {
+            estadoAtual.cancelar(this);
+        }
+    }
 }
