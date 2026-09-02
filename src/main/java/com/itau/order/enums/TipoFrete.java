@@ -1,4 +1,4 @@
-﻿package com.itau.order.enums;
+package com.itau.order.enums;
 
 public enum TipoFrete {
     EXPRESSO,

@@ -1,4 +1,4 @@
-﻿package com.itau.order.strategy;
+package com.itau.order.strategy;
 
 import com.itau.order.model.Pedido;
 import org.springframework.stereotype.Component;

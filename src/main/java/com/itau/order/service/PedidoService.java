@@ -1,4 +1,4 @@
-﻿package com.itau.order.service;
+package com.itau.order.service;
 
 import com.itau.order.chain.ValidadorPedido;
 import com.itau.order.model.Pedido;

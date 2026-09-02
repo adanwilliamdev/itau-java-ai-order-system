@@ -1,4 +1,4 @@
-﻿package com.itau.order.chain;
+package com.itau.order.chain;
 
 import com.itau.order.model.Pedido;
 import com.itau.order.service.PagamentoService;

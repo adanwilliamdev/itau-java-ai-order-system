@@ -1,4 +1,4 @@
-﻿package com.itau.order.state;
+package com.itau.order.state;
 
 import com.itau.order.model.Pedido;
 import com.itau.order.enums.StatusPedido;

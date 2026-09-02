@@ -1,4 +1,4 @@
-﻿package com.itau.order;
+package com.itau.order;
 
 import com.itau.order.model.Cliente;
 import com.itau.order.model.ItemPedido;

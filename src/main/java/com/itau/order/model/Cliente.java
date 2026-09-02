@@ -1,4 +1,4 @@
-﻿package com.itau.order.model;
+package com.itau.order.model;
 
 import lombok.Data;
 import java.util.List;

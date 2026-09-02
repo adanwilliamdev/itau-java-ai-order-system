@@ -1,4 +1,4 @@
-﻿package com.itau.order.controller;
+package com.itau.order.controller;
 
 import com.itau.order.model.Pedido;
 import com.itau.order.service.PedidoService;

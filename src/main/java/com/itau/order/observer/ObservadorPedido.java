@@ -1,4 +1,4 @@
-﻿package com.itau.order.observer;
+package com.itau.order.observer;
 
 import com.itau.order.model.Pedido;
 
