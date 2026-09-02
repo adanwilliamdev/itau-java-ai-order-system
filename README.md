@@ -2,23 +2,21 @@
 
 ### Desafio Final | Itaú Java AI
 
-Sistema de processamento de pedidos desenvolvido em **Java + Spring Boot**, criado como projeto final do curso de **Padrões de Projeto (Design Patterns)** da formação Itaú Java AI.
+Sistema de processamento de pedidos desenvolvido em **Java e Spring Boot** como parte do desafio final do curso de **Padrões de Projeto (Design Patterns)**.
 
-O projeto aplica padrões de projeto clássicos de forma integrada, simulando o ciclo completo de processamento de um pedido, desde sua criação até a entrega.
+O projeto foi desenvolvido com o objetivo de aplicar, de forma prática e integrada, diferentes padrões de projeto no desenvolvimento de uma aplicação de processamento de pedidos.
 
 ---
 
 ## 📋 Sobre o Projeto
 
-A aplicação foi desenvolvida com foco na aplicação prática de **Design Patterns**, utilizando uma arquitetura organizada e extensível para representar diferentes responsabilidades do processo de pedidos.
+A aplicação representa um sistema de processamento de pedidos, utilizando diferentes **Design Patterns** para organizar o gerenciamento de estados, validações, cálculo de frete e notificações.
 
-O fluxo principal contempla:
+O ciclo de vida do pedido é representado pelos seguintes estados:
 
 ```text
 PENDENTE → PAGO → ENVIADO → ENTREGUE
 ```
-
-Durante o processamento, o sistema realiza validações, calcula o frete de acordo com a estratégia escolhida e dispara notificações para o cliente.
 
 ---
 
@@ -26,7 +24,9 @@ Durante o processamento, o sistema realiza validações, calcula o frete de acor
 
 ### 🔄 State
 
-Utilizado para gerenciar o **ciclo de vida do pedido**, permitindo controlar as transições entre seus diferentes estados.
+O padrão **State** é utilizado para representar e gerenciar os diferentes estados do pedido.
+
+Estados utilizados:
 
 ```text
 PENDENTE
@@ -38,53 +38,49 @@ ENVIADO
 ENTREGUE
 ```
 
-Também permite o tratamento de operações específicas de acordo com o estado atual do pedido.
+Cada estado representa uma etapa diferente do ciclo de vida do pedido.
 
 ---
 
 ### ⛓️ Chain of Responsibility
 
-Utilizado para implementar uma cadeia de validações antes do processamento do pedido.
+O padrão **Chain of Responsibility** é utilizado para organizar as validações do processamento do pedido em uma cadeia.
+
+Validações:
 
 ```text
-Estoque
-   ↓
-Pagamento
-   ↓
-Frete
-   ↓
-Pedido processado
+Estoque → Pagamento → Frete
 ```
 
-Cada etapa é responsável por uma validação específica, mantendo as responsabilidades desacopladas.
+Cada etapa da cadeia é responsável por realizar sua respectiva validação antes que o processamento avance.
 
 ---
 
 ### 🚚 Strategy
 
-Utilizado para permitir diferentes estratégias de cálculo de frete sem alterar a lógica principal do pedido.
+O padrão **Strategy** é utilizado para definir diferentes estratégias para o cálculo do frete.
 
-Estratégias implementadas:
+Estratégias disponíveis:
 
-* ⚡ **Expresso**
-* 📦 **Econômico**
-* 🏪 **Retirada na Loja**
+* ⚡ Expresso
+* 📦 Econômico
+* 🏪 Retirada na Loja
 
-A estratégia pode ser selecionada de acordo com o tipo de frete informado no pedido.
+A estratégia de frete é definida de acordo com o tipo escolhido para o pedido.
 
 ---
 
 ### 👀 Observer
 
-Utilizado para implementar o sistema de notificações.
+O padrão **Observer** é utilizado para o sistema de notificações.
 
-Canais disponíveis:
+Canais de notificação disponíveis:
 
 * 📧 Email
 * 📱 SMS
 * 🔔 Push
 
-Quando ocorre um evento relevante no pedido, os observadores interessados são notificados automaticamente.
+O padrão permite que diferentes mecanismos de notificação sejam acionados quando ocorre uma alteração relevante no pedido.
 
 ---
 
@@ -99,11 +95,11 @@ src/
                 └── order/
                     ├── model/        # Entidades do sistema
                     ├── enums/        # Enumerações
-                    ├── state/        # Padrão State
-                    ├── chain/        # Chain of Responsibility
-                    ├── strategy/     # Padrão Strategy
-                    ├── observer/     # Padrão Observer
-                    ├── service/      # Regras de negócio
+                    ├── state/        # Implementação do State
+                    ├── chain/        # Implementação do Chain of Responsibility
+                    ├── strategy/     # Implementação do Strategy
+                    ├── observer/     # Implementação do Observer
+                    ├── service/      # Serviços da aplicação
                     └── controller/   # Endpoints REST
 ```
 
@@ -111,13 +107,11 @@ src/
 
 ## 🛠️ Tecnologias
 
-| Tecnologia           | Versão |
-| -------------------- | ------ |
-| ☕ Java               | 17     |
-| 🍃 Spring Boot       | 3.2.0  |
-| 📦 Maven             | 3.6+   |
-| 🛠️ Lombok           | —      |
-| 📚 Swagger / OpenAPI | —      |
+* ☕ **Java 17**
+* 🍃 **Spring Boot 3.2.0**
+* 📦 **Maven**
+* 🛠️ **Lombok**
+* 📚 **Swagger / OpenAPI**
 
 ---
 
@@ -125,49 +119,42 @@ src/
 
 ### Pré-requisitos
 
-Antes de executar o projeto, certifique-se de possuir:
-
 * **JDK 17 ou superior**
 * **Maven 3.6 ou superior**
-* IDE de sua preferência, como IntelliJ IDEA, Eclipse ou VS Code
 
-### 1. Clone o repositório
+### Executando o projeto
 
-```bash
-git clone <URL_DO_REPOSITORIO>
-```
-
-### 2. Acesse o diretório
+Clone o repositório e acesse a pasta do projeto:
 
 ```bash
-cd itau-java-ai-order-system
+cd C:\Dev\Projetos\itau-java-ai-order-system
 ```
 
-### 3. Compile o projeto
+Compile o projeto:
 
 ```bash
 mvn clean install
 ```
 
-### 4. Execute a aplicação
+Execute a aplicação:
 
 ```bash
 mvn spring-boot:run
 ```
 
-A aplicação estará disponível na porta configurada pelo Spring Boot.
-
 ---
 
-## 📡 API REST
+## 📡 Exemplo de Uso
 
 ### Criar Pedido
 
-```http
-POST /api/pedidos
+**POST**
+
+```text
+/api/pedidos
 ```
 
-#### Exemplo de requisição
+### Requisição
 
 ```json
 {
@@ -196,104 +183,34 @@ POST /api/pedidos
 
 ## 🔗 Endpoints
 
-| Método | Endpoint                           | Descrição                |
-| ------ | ---------------------------------- | ------------------------ |
-| `POST` | `/api/pedidos`                     | Criar pedido             |
-| `PUT`  | `/api/pedidos/{id}/proximo-estado` | Avançar estado do pedido |
-| `PUT`  | `/api/pedidos/{id}/cancelar`       | Cancelar pedido          |
-| `GET`  | `/api/pedidos`                     | Listar pedidos           |
-| `GET`  | `/api/pedidos/{id}`                | Buscar pedido por ID     |
+| Método | Endpoint                           | Descrição                     |
+| ------ | ---------------------------------- | ----------------------------- |
+| `POST` | `/api/pedidos`                     | Criar pedido                  |
+| `PUT`  | `/api/pedidos/{id}/proximo-estado` | Avançar para o próximo estado |
+| `PUT`  | `/api/pedidos/{id}/cancelar`       | Cancelar pedido               |
+| `GET`  | `/api/pedidos`                     | Listar pedidos                |
+| `GET`  | `/api/pedidos/{id}`                | Buscar pedido por ID          |
 
 ---
 
-## 🔄 Fluxo de Processamento
+## 📚 Documentação da API
 
-O processamento de um pedido combina os padrões implementados em diferentes etapas:
+O projeto utiliza **Swagger/OpenAPI** para documentação e teste dos endpoints da API REST.
 
-```text
-                    ┌──────────────────┐
-                    │   Criar Pedido   │
-                    └────────┬─────────┘
-                             ↓
-                    ┌──────────────────┐
-                    │     PENDENTE     │
-                    └────────┬─────────┘
-                             ↓
-                  ┌──────────────────────┐
-                  │ Chain of Responsibility │
-                  └──────────┬───────────┘
-                             ↓
-                 ┌────────────────────────┐
-                 │  Estoque → Pagamento  │
-                 │        → Frete        │
-                 └───────────┬────────────┘
-                             ↓
-                    ┌──────────────────┐
-                    │      PAGO        │
-                    └────────┬─────────┘
-                             ↓
-                    ┌──────────────────┐
-                    │     ENVIADO      │
-                    └────────┬─────────┘
-                             ↓
-                    ┌──────────────────┐
-                    │    ENTREGUE      │
-                    └──────────────────┘
-                             │
-                             ↓
-                 ┌────────────────────────┐
-                 │       Observer         │
-                 │ Email • SMS • Push     │
-                 └────────────────────────┘
-```
-
-O cálculo do frete é realizado utilizando o padrão **Strategy**, permitindo trocar a implementação sem modificar o fluxo principal.
+Após iniciar a aplicação, a documentação pode ser acessada pela interface do Swagger configurada no projeto.
 
 ---
 
-## 📚 Conceitos Demonstrados
+## 🎓 Objetivo
 
-Este projeto demonstra conhecimentos em:
+Este projeto foi desenvolvido como **Desafio Final do Itaú Java AI**, com foco na aplicação prática dos conceitos de **Design Patterns em Java**.
 
-* Programação Orientada a Objetos
-* Design Patterns
-* Princípios SOLID
-* Separação de responsabilidades
-* Arquitetura em camadas
-* Desenvolvimento de APIs REST
-* Injeção de Dependências
-* Encapsulamento
-* Enumerações
-* Tratamento de estados
-* Validação de regras de negócio
-* Comunicação entre componentes
-* Documentação de APIs
+Os padrões utilizados são:
 
----
-
-## 📖 Documentação da API
-
-A API possui integração com **Swagger/OpenAPI**, permitindo visualizar e testar os endpoints diretamente pelo navegador.
-
-Após iniciar a aplicação, acesse a rota de documentação configurada no projeto.
-
----
-
-## 🎓 Objetivo do Projeto
-
-O principal objetivo foi transformar conceitos teóricos de **Design Patterns** em uma aplicação prática, demonstrando como diferentes padrões podem trabalhar juntos para criar um sistema mais:
-
-* 🔧 **Manutenível**
-* 📈 **Extensível**
-* 🧩 **Modular**
-* 🧪 **Testável**
-* 📐 **Organizado**
-
----
-
-## 👨‍💻 Desenvolvimento
-
-Projeto desenvolvido como parte do **Desafio Final do Itaú Java AI**, com foco no desenvolvimento backend utilizando Java e Spring Boot.
+* **State** para gerenciamento dos estados do pedido;
+* **Chain of Responsibility** para validações;
+* **Strategy** para estratégias de cálculo de frete;
+* **Observer** para notificações.
 
 ---
 
@@ -301,6 +218,6 @@ Projeto desenvolvido como parte do **Desafio Final do Itaú Java AI**, com foco 
 
 ### 🚀 Java • Spring Boot • Design Patterns
 
-**Desenvolvido com foco em boas práticas e evolução contínua em Backend Java.**
+**Desenvolvido como projeto final do Itaú Java AI.**
 
 </div>
